@@ -6,9 +6,9 @@ const Sidebar = () => {
   //early return
   if (!isMenuOpen) return null;
   return (
-    <div className="p-5 shadow-lg w-48 grid grid-cols-1 divide-y  ">
-      <div>
-        <ul className=" py-5">
+    <div className="p-5 shadow-lg w-48">
+      <div >
+        <ul className=" py-4">
           <li>Home</li>
           <li>Shorts</li>
           <li>Subscriptions</li>

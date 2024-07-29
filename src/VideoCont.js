@@ -1,31 +1,25 @@
-import React, { useEffect } from 'react';
-import { YT_API } from './utils.js/constants';
+import React, { useEffect, useState } from "react";
+import { YT_API } from "./utils/constants";
+import VideoCard from "./VideoCard";
 
 const VideoCont = () => {
+  const [videos, setVideos] = useState([]);
+
   useEffect(() => {
     getVideos();
   }, []);
-
   const getVideos = async () => {
-    try {
-      const response = await fetch(YT_API);
-      // Log the response to see if you are getting the expected data
-      console.log('Response:', response);
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      const json = await response.json();
-      console.log(json);
-    } catch (error) {
-      console.error('Error fetching videos:', error);
-    }
+    const data = await fetch(YT_API);
+    const json = await data.json();
+    setVideos(json.items);
   };
-
   return (
-    <div></div>
+    <div className="flex flex-wrap">
+      {videos.map((video) => (
+        <VideoCard key={video.id} info={video} />
+      ))}
+    </div>
   );
-}
+};
 
 export default VideoCont;
